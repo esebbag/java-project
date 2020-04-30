@@ -3,7 +3,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Geometries.Plane;
 import Geometries.Triangle;
 import primitives.Point3D;
 import primitives.Vector;
@@ -22,13 +21,13 @@ public class TriangleTest
 		Vector normal = tr.getNormal(a); // the function that does receive a point	 
 		 
 		// ============ Equivalence Partitions Tests ============== 
-		Vector vec1 = new Vector(b.subtract(a));
-		Vector vec2 = new Vector(c.subtract(a));
+		Vector v1 = new Vector(b.subtract(a));
+		Vector v2 = new Vector(c.subtract(a));
 		
-		Vector vec3 = vec1.crossProduct(vec2);
-		Vector normalToPln = vec3.normalize();
+		Vector v3 = v1.crossProduct(v2);
+		Vector n = v3.normalize();// vector normal to plane
 		
-		assertEquals("Triangle, GetNormal() wrong result- this is not the normal", normalToPln, normal);
+		assertEquals("Triangle, GetNormal() wrong result- this is not the normal", n, normal);
 	}
 
 }

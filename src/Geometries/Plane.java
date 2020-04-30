@@ -23,8 +23,7 @@ public class Plane implements Geometry {
 	}
 	
 	 public Vector getNormal(Point3D p) {
-	        return null;
-	    }
+		  return _normal;	    }
 
 	@Override
 	public String toString() {
