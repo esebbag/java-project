@@ -51,6 +51,7 @@ public class Vector {
 		this._head=vec._head;
 	}
 	
+	
 	 public Point3D getPoint() {
 			return _head;
 		}
@@ -81,10 +82,12 @@ public class Vector {
 				));
 	}
 	
-	public Vector subtract (Vector v)
-	{
-		return new Vector ()
-	}
+	 public Vector subtract(Vector v)
+	    {
+	      return new Vector(this._head.subtract(v._head));
+
+	    }
+
 	
     public Vector add(Point3D p) {
 		

@@ -1,4 +1,4 @@
-package tests;
+package unitTest;
 
 public class CoordinateTest {
 

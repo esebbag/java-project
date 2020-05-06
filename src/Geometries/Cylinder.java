@@ -1,6 +1,8 @@
-package Geometries;
+package geometries;
 
-	import primitives.*;
+	import java.util.List;
+
+import primitives.*;
 
 	public class Cylinder extends Tube{
 		
@@ -25,7 +27,11 @@ package Geometries;
 		
 		public Vector getNormal(Point3D p)
 		{
-			return null;
+			 Vector u = p.subtract(this._axisRay.getPoint());
+		        double t =this._axisRay.getVec().dotProduct(u);
+		        Point3D point = this._axisRay.getPoint().add(this._axisRay.getVec().scale(t));
+		        Vector n = new Vector(p.subtract(point));
+		        return n.normalize();
 		}
 
 		@Override
@@ -48,8 +54,13 @@ package Geometries;
 				return false;
 			return true;
 		}
+		
+		 @Override
+		    public List<Point3D> findIntersections(Ray ray) {
+		        return super.findIntersections(ray);
+		    }
 
 	}
 
 
-}
+

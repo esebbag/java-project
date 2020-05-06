@@ -1,9 +1,9 @@
-package tests;
+package unitTest;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Geometries.Triangle;
+import geometries.Triangle;
 import primitives.Point3D;
 import primitives.Vector;
 

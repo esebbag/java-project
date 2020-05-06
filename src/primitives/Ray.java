@@ -29,6 +29,9 @@ public class Ray {
 		return vec;
 		
 	}
+	
+	public Point3D getFinalPoint(double length) {
+        return Util.isZero(length ) ? point : point.add(vec.scale(length));}
 
 	@Override
 	public String toString() {

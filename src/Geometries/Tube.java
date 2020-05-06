@@ -1,4 +1,6 @@
-package Geometries;
+package geometries;
+import java.util.List;
+
 import primitives.*;
 
 public class Tube extends RadialGeometry {	
@@ -21,11 +23,19 @@ public class Tube extends RadialGeometry {
 		return _axisRay;
 	}
 	
-	public Vector getNormal (Point3D p)
-	{
-		return null;
-	}
+	 public Vector getNormal(Point3D p) {
+	        //The vector from the point of the cylinder to the given point
+	        Vector vector1 = p.subtract(this._axisRay.getPoint());
 
+	        //We need the projection to multiply the _direction unit vector
+	        double projection = vector1.dotProduct(this._axisRay.getVec());
+
+	        Vector vector2 = this._axisRay.getVec().scale(projection);
+
+	        //This vector is orthogonal to the _direction vector.
+	        Vector check = vector1.subtract(vector2);
+	        return check.normalize();
+	    }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -43,12 +53,19 @@ public class Tube extends RadialGeometry {
 			return false;
 		return true;
 	}
+	
 
 	@Override
 	public String toString() {
 		return "Tube [_axisRay=" + _axisRay + ", _radius=" + _radius + ", getRay()=" + getRay() + ", getRadius()="
 				+ getRadius() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 				+ super.toString() + "]";
+	}
+
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

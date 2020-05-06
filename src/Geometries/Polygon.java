@@ -1,11 +1,17 @@
-package Geometries;
-import Geometries.*;
+package geometries;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
+
+import geometries.*;
+
 import java.util.Arrays;
 import java.util.List;
 import primitives.*;
+
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
+
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
@@ -120,6 +126,37 @@ public class Polygon implements Geometry {
 			return false;
 		return true;
 	}
+	
+	
+	public List<Point3D> findIntersections(Ray ray) {
+        List<Point3D> intersections = _plane.findIntersections(ray);
+        if (intersections == null) return null;
+
+        Point3D p = ray.getPoint();
+        Vector v = ray.getVec();
+
+        Vector v1  = _vertices.get(1).subtract(p);
+        Vector v2 = _vertices.get(0).subtract(p);
+        Vector crossProduct=v1.crossProduct(v2);
+        double sign = v.dotProduct(crossProduct);
+        if (isZero(sign))
+            return null;
+
+        boolean positive = sign > 0;
+
+        for (int i = _vertices.size() - 1; i > 0; --i) {
+            v1 = v2;
+            v2 = _vertices.get(i).subtract(p);
+            double dotProduct=v.dotProduct(v1.crossProduct(v2));
+            sign = alignZero(dotProduct);
+            if (isZero(sign))
+                return null;
+            if (positive != (sign >0))
+                return null;
+        }
+
+        return intersections;
+    }
 
 	@Override
 	public String toString() {

@@ -1,9 +1,9 @@
-package tests;
+package unitTest;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import Geometries.Tube;
+import geometries.Tube;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Util;
