@@ -61,11 +61,11 @@ public class Sphere extends RadialGeometry {
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
 		ArrayList <Point3D> intersection = null;
-		Vector l = new Vector(_center);//(2,2,2)
+		Vector l = new Vector(center);//(2,2,2)
 		
 		try
 		{
-			l = l.subtract(new Vector(ray.get_Point()));
+			l = l.subtract(new Vector(ray.getPoint()));
 		}
 		catch(IllegalArgumentException e)
 		{
@@ -83,7 +83,7 @@ public class Sphere extends RadialGeometry {
 			intersection.add(p);
 			return intersection;				
 		}
-		double t_m = l.dotProduct(ray.getDirection());
+		double t_m = l.dotProduct(ray.getVec());
 		double d = Math.sqrt(l.dotProduct(l)-t_m*t_m); 
 		
 		if(d>_radius) // there are no intersections
@@ -97,11 +97,6 @@ public class Sphere extends RadialGeometry {
 		if(t1 > 0)
 		{
 			intersection = new ArrayList<Point3D>();
-			//Vector v1 = new Vector(ray.getDirection());
-			//v1 = v1.scale(t1);//t1v
-			//Point3D p1 = new Point3D(ray.get_Point());
-			//p1 = p1.add(v1);
-			
 			//after refactoring
 			Point3D p1 = ray.getPoint(t1);
 			
@@ -111,10 +106,7 @@ public class Sphere extends RadialGeometry {
 		
 		if(t2 > 0)
 		{
-			//Vector v2 = new Vector(ray.getDirection());
-			//v2 = v2.scale(t2);//t2v
-			//Point3D p2 = new Point3D(ray.get_Point());
-			//p2 = p2.add(v2);
+			
 			
 			Point3D p2 = ray.getPoint(t2);
 						
@@ -131,6 +123,4 @@ public class Sphere extends RadialGeometry {
 	
 	
 	
-	
 
-}

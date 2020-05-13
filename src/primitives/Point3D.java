@@ -9,6 +9,16 @@ public Point3D(Coordinate x, Coordinate y, Coordinate z) {
 	this.z = z;
 }
 
+public Point3D(Point3D point)
+{
+	this.x = point.x;
+	this.y = point.y;
+	this.z = point.z;
+}
+
+
+
+
 public Point3D(double x, double y, double z) {
 	this(new Coordinate(x), new Coordinate(y), new Coordinate(z));
 }

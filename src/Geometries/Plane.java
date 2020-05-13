@@ -40,21 +40,44 @@ public class Plane implements Geometry {
 	
 
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		 Vector v;
-	        try {
-	            v= _p.subtract(ray.getPoint());
-	        } catch (IllegalArgumentException e) {
-	            return null; // ray starts from point Q - no intersections
-	        }
-	        double n = _normal.dotProduct(ray.getVec());
-	        if (isZero(n)) // ray is parallel to the plane - no intersections
-	            return null;
-
-	        double a = alignZero(_normal.dotProduct(v) / n);
-	         if(a<=0)
-	             return null;
-	        return List.of(ray.getFinalPoint(a));
+	public List<Point3D> findIntersections(Ray ray)
+	{
+		ArrayList<Point3D> intersectionPoint = null;
+		Vector n = new Vector(_normal);
+		Vector pq = new Vector(_p);
+		
+		try
+		{
+			pq = pq.subtract(new Vector(ray.getPoint()));
+		}
+		catch(IllegalArgumentException e) // this means that the ray starts at the exact point that resembles the plane and that is why we'll get ZERO vector from subtraction
+		{
+			return intersectionPoint;
+		}
+	 
+		double mone = n.dotProduct(pq);
+		double mechane = n.dotProduct(new Vector(ray.getVec()));
+		if(isZero(mechane))
+			return intersectionPoint;
+		double t = alignZero(mone/mechane);
+		 
+		if( t > 0)
+		{
+			intersectionPoint = new ArrayList<Point3D>();
+			
+			//Vector vec = new Vector(ray.getDirection());
+			//vec = vec.scale(t);//t1*vec
+			//Point3D p = new Point3D(ray.get_Point());
+			//p = p.add(vec);
+			
+			//refactor
+			Point3D p = ray.getPoint(t);	
+			
+			intersectionPoint.add(p);
+			return intersectionPoint;
+		}
+		
+		return intersectionPoint;
 	}
 
 	

@@ -1,8 +1,8 @@
 package primitives;
 
 public class Ray {
-	Point3D point;
-	Vector vec;
+	private Point3D point;
+	private Vector vec;
 	
 	public Ray (Point3D p, Vector v)
 	{
@@ -20,15 +20,27 @@ public class Ray {
 	}
 	
 	public Point3D getPoint()
+	{
+		return this.point;
+	}
+	
+	public Point3D getPoint(double t2)
 	{ 
-		return point;
+		Vector v = this.getVec();
+		Point3D p = new Point3D(this.point);
+		p = p.add(v.scale(t2));
+		
+		return p;
 		
 	}
+	
+	
 	public Vector getVec()
 	{ 
 		return vec;
 		
 	}
+		
 	
 	public Point3D getFinalPoint(double length) {
         return Util.isZero(length ) ? point : point.add(vec.scale(length));}
@@ -53,6 +65,9 @@ public class Ray {
 		return vec.equals(other.vec)&&point.equals(other.point);
 		
 	}
+
+
+
 	
 
 }
